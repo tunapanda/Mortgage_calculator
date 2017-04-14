@@ -1,45 +1,83 @@
 <?php
-/*
-Plugin Name: Property Check
-Plugin URI: https://github.com/tunapanda/Mortgage_calculator
-GitHub Plugin URI: https://github.com/tunapanda/Mortgage_calculator
-Description: A demo that shows how to split the code into Model, View and Controller.
-Version: 0.0.1
+
+
+
+/**
+
+*
+
 */
 
-class MortgageCalc extends WP_Widget{
+class MortgageCalc extends WP_Widget
 
-  function __construct(){
-    parent::WP_Widget(false, $name = __('MortgageCalculator', 'wp_widget_plugin') );
+{
 
-  }
+public function __construct() {
 
+  parent::WP_Widget(
 
-  function Calc($instance){
-    $default = array(
-      'title' =>__(''),
-      'calculator' =>__(''),
-    );
+    'calculator',
 
-    $instance = wp_parse_args( (array)$instance, $default );
-    		echo "\r\n";
-    		echo "<p>";
-    		echo "<label for='".$this->get_field_id('title')."'>" . __('Title') . ":</label> " ;
-    		echo "<input type='text' class='widefat' id='".$this->get_field_id('title')."'
-            name='".$this->get_field_name('title')."' value='" . esc_attr($instance['title'] ) . "' />" ;
+    //title of the widget in the WP dashboard
+    __('Mortgage'),
 
-        echo "<p>";
-        echo "<label for='".$this->get_field_id('calculator')."'>" . __('Calculator') . ":</label> " ;
-        echo "<input type='text' class='widefat' id='".$this->get_field_id('calculator')."'
-          name='".$this->get_field_name('calculator')."' value='" . esc_attr($instance['calculator'] ) . "' />" ;
-  }
-function update($new_instance, $old_instance){
-    $instance = $old_instance;
-		$instance['title'] = strip_tags($new_instance['title']);
-		$instance['calculator'] = $new_instance['calculator'];
-		return $instance;
+    array('description'=>'Wraps whatever you type in with code.', 'class'=>'register_calculator_widget')
+
+  );
 
 }
+
+
+
+/**
+
+ *
+
+ * @param type $instance
+
+ */
+
+public function form($instance)
+
+{
+  // these are the default widget values
+  $default = array(
+
+    'title' => __(''),
+    "testing" =>__("")
+      );
+
+  $instance = wp_parse_args( (array)$instance, $default );
+
+  //this is the html for the fields in the wp dashboard
+  echo "\r\n";
+
+  echo "<p>";
+
+  echo "<label for='".$this->get_field_id('title')."'>" . __('Title') . ":</label> " ;
+
+  echo "<input type='text' class='widefat' id='".$this->get_field_id('title')."' name='".$this->get_field_name('title')."' value='" . esc_attr($instance['title'] ) . "' />" ;
+
+  echo "</p>";
+
+  echo "<p>";
+
+  echo "<label for='".$this->get_field_id('testing')."'>" . __('What do you want wrapped?') . ":</label> " ;
+
+  echo "<input type='text' class='widefat' id='".$this->get_field_id('testing')."' name='".$this->get_field_name('testing')."' value='" . esc_attr( $instance['testing'] ) . "' placeholder='This shows up as a watermark in the field.' />" ;
+
+  echo "</p>";
+}
+public function update($new_instance, $old_instance){
+
+  $instance = $old_instance;
+
+  $instance['title'] = strip_tags($new_instance['title']);
+  $instance['testing'] = $new_instance['testing'];
+  return $instance;
+
+}
+
 public function widget($args, $instance){
 
   extract($args, EXTR_SKIP);
@@ -50,7 +88,7 @@ public function widget($args, $instance){
   // code before your user input
   echo '<div class="your-class"><!--Your custom html code goes here!-->';
 
-  echo $instance['code'];
+  echo $instance['testing'];
 
   // code after your user input
   echo '</div>';
@@ -60,6 +98,3 @@ public function widget($args, $instance){
 }
 
 }
-
-
-add_action('widgets_init', create_function('', 'return register_widget("MortgageCalc");'));
