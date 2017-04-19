@@ -1,0 +1,59 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+	font-size: 1em;
+}
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+
+#amount{
+	border:0;
+	font-weight:bold;
+}
+
+#custom-handle {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+}
+
+#wid{
+	width: 500px;
+	margin-left: 200px;
+	margin-top: 100px;
+}
+#slider{
+	margin-left: 150px;
+}
+
+#back{
+	margin-left: -170px;
+}
+
+#interest{
+	margin-left: 150px;
+}
+
+#years{
+	margin-left: 150px;
+}
+
+#amount_monthly{
+	margin-left: 25px;
+}
+
+
+#user_input{
+	margin-left: 42px;
+}
+
+#button{
+	margin-top: 20px;
+}
